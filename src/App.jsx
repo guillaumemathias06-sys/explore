@@ -296,7 +296,7 @@ const Waitlists = () => {
               type="text"
               name="LNAME"
               id="mce-LNAME"
-              placeholder="Nom de famille (optionnel)"
+              placeholder="Nom de famille"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
             
