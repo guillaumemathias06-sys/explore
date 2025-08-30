@@ -399,6 +399,7 @@ const Waitlists = () => {
 
 
 
+
 const FAQ = () => (
   <Section id="faq" className="py-16 sm:py-24">
     <div className="mx-auto max-w-3xl">
