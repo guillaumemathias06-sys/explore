@@ -277,7 +277,7 @@ const Waitlists = () => {
     <Section id="waitlist" className="py-16 sm:py-24">
       <div className="grid gap-8 md:grid-cols-2">
 
-        {/* --- FORMULAIRE USERS (MAILCHIMP + TAG CLIENT) --- */}
+        {/* --- FORMULAIRE USERS (MAILCHIMP) --- */}
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
@@ -294,7 +294,7 @@ const Waitlists = () => {
             {/* Champ caché pour segmenter */}
             <input type="hidden" name="TYPE" value="Client" />
 
-             {/* Nom */}
+            {/* Nom de famille (optionnel) */}
             <input
               type="text"
               name="LNAME"
@@ -302,8 +302,8 @@ const Waitlists = () => {
               placeholder="Nom de famille (optionnel)"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
-            
-             {/* Prénom */}
+
+            {/* Prénom */}
             <input
               type="text"
               name="FNAME"
@@ -312,15 +312,15 @@ const Waitlists = () => {
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
 
-            {/* Email */}
+            {/* Email (obligatoire) */}
             <input
               type="email"
               name="EMAIL"
               id="mce-EMAIL"
               required
-              placeholder="Email"
+              placeholder="Adresse e-mail"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-              />
+            />
 
             {/* Honeypot anti-bots — ne pas retirer */}
             <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
@@ -343,7 +343,7 @@ const Waitlists = () => {
           </form>
         </div>
 
-        {/* --- FORMULAIRE PARTENAIRES (MAILCHIMP + TAG PARTENAIRE) --- */}
+        {/* --- FORMULAIRE PARTENAIRES (MAILCHIMP) --- */}
         <div id="waitlist-partners" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Proposer une expérience (Partenaires)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
@@ -370,7 +370,7 @@ const Waitlists = () => {
               required
             />
 
-            {/* Email */}
+            {/* Email (obligatoire) */}
             <input
               type="email"
               name="EMAIL"
@@ -380,12 +380,12 @@ const Waitlists = () => {
               required
             />
 
-            {/* Téléphone */}
+            {/* Téléphone (optionnel) */}
             <input
               type="text"
               name="PHONE"
               id="mce-PHONE"
-              placeholder="Numéro de téléphone"
+              placeholder="Numéro de téléphone (optionnel)"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
 
@@ -429,6 +429,7 @@ const Waitlists = () => {
     </Section>
   );
 };
+
 
 
 
