@@ -291,6 +291,15 @@ const Waitlists = () => {
             target="_blank"
             noValidate
           >
+            {/* Nom de famille (optionnel) (Mailchimp: LNAME) */}
+            <input
+              type="text"
+              name="LNAME"
+              id="mce-LNAME"
+              placeholder="Nom de famille (optionnel)"
+              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            
             {/* Prénom (Mailchimp: FNAME) */}
             <input
               type="text"
@@ -308,16 +317,7 @@ const Waitlists = () => {
               required
               placeholder="Email"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-            />
-
-            {/* Nom de famille (optionnel) (Mailchimp: LNAME) */}
-            <input
-              type="text"
-              name="LNAME"
-              id="mce-LNAME"
-              placeholder="Nom de famille (optionnel)"
-              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-            />
+             />
 
             {/* Honeypot anti-bots — ne pas retirer */}
             <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
