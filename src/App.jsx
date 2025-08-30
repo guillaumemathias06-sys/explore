@@ -273,11 +273,10 @@ const PartnersCTA = () => (
 );
 
 const Waitlists = () => {
-  const [sentPartner, setSentPartner] = useState(false);
-
   return (
     <Section id="waitlist" className="py-16 sm:py-24">
       <div className="grid gap-8 md:grid-cols-2">
+
         {/* --- FORMULAIRE USERS --- */}
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
@@ -285,6 +284,7 @@ const Waitlists = () => {
             Sois parmi les premiers à tester Explore à tarif réduit. On t'enverra les invitations dès l'ouverture.
           </p>
 
+          {/* Formulaire Users */}
           <form action="https://formspree.io/f/xovndvnj" method="POST" className="mt-6 grid gap-3 sm:grid-cols-3">
             <input
               required
@@ -302,7 +302,6 @@ const Waitlists = () => {
             />
             {/* Anti-spam honeypot (optionnel) */}
             <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
-
             <button className="sm:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
               Je veux tester <Sparkles size={16} />
             </button>
@@ -316,57 +315,55 @@ const Waitlists = () => {
             Club, studio, bar, atelier, artisan : propose un créneau Explore pour attirer une nouvelle clientèle locale.
           </p>
 
-          <form
-            className="mt-6 grid gap-3 sm:grid-cols-2"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSentPartner(true);
-            }}
-          >
+          {/* Formulaire Partenaires */}
+          <form action="https://formspree.io/f/mpwjdwjd" method="POST" className="mt-6 grid gap-3 sm:grid-cols-2">
             <input
               required
+              name="business"
               type="text"
               placeholder="Nom de l'établissement"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
             <input
               required
+              name="city"
               type="text"
               placeholder="Ville"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
             <input
               required
+              name="email"
               type="email"
               placeholder="Email"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
             <input
+              name="phone"
               type="tel"
               placeholder="Téléphone (optionnel)"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
             <input
               required
+              name="experience"
               type="text"
               placeholder="Type d'expérience (ex: yoga, dégustation)"
               className="sm:col-span-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
+            {/* Anti-spam honeypot (optionnel) */}
+            <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
             <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
               Devenir partenaire <ArrowRight size={16} />
             </button>
           </form>
-
-          {sentPartner && (
-            <p className="mt-3 text-sm text-emerald-700">
-              Merci ! On te contacte rapidement pour valider un premier créneau.
-            </p>
-          )}
         </div>
+
       </div>
     </Section>
   );
 };
+
 
 
 
