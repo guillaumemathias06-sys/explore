@@ -277,7 +277,7 @@ const Waitlists = () => {
     <Section id="waitlist" className="py-16 sm:py-24">
       <div className="grid gap-8 md:grid-cols-2">
 
-        {/* --- FORMULAIRE USERS (MAILCHIMP) --- */}
+        {/* --- FORMULAIRE USERS (MAILCHIMP + TAG CLIENT) --- */}
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
@@ -291,7 +291,10 @@ const Waitlists = () => {
             target="_blank"
             noValidate
           >
-            {/* Prénom (Mailchimp: FNAME) */}
+            {/* Champ caché pour segmenter */}
+            <input type="hidden" name="TYPE" value="Client" />
+
+            {/* Prénom */}
             <input
               type="text"
               name="FNAME"
@@ -300,7 +303,7 @@ const Waitlists = () => {
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
 
-            {/* Email (obligatoire) */}
+            {/* Email */}
             <input
               type="email"
               name="EMAIL"
@@ -310,7 +313,7 @@ const Waitlists = () => {
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
 
-            {/* Nom de famille (optionnel) */}
+            {/* Nom (optionnel) */}
             <input
               type="text"
               name="LNAME"
@@ -340,7 +343,7 @@ const Waitlists = () => {
           </form>
         </div>
 
-        {/* --- FORMULAIRE PARTENAIRES (MAILCHIMP) --- */}
+        {/* --- FORMULAIRE PARTENAIRES (MAILCHIMP + TAG PARTENAIRE) --- */}
         <div id="waitlist-partners" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Proposer une expérience (Partenaires)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
@@ -354,6 +357,9 @@ const Waitlists = () => {
             target="_blank"
             noValidate
           >
+            {/* Champ caché pour segmenter */}
+            <input type="hidden" name="TYPE" value="Partenaire" />
+
             {/* Nom de l'entreprise */}
             <input
               type="text"
@@ -423,6 +429,7 @@ const Waitlists = () => {
     </Section>
   );
 };
+
 
 
 
