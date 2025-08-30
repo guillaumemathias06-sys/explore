@@ -279,7 +279,7 @@ const Waitlists = () => {
 
         {/* --- FORMULAIRE USERS (MAILCHIMP) --- */}
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-900">Rejoindre la version bêta (à Nice)</h3>
+          <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
             Sois parmi les premiers à tester Explore à tarif réduit. On t'enverra les invitations dès l'ouverture.
           </p>
@@ -291,15 +291,6 @@ const Waitlists = () => {
             target="_blank"
             noValidate
           >
-            {/* Nom de famille (optionnel) (Mailchimp: LNAME) */}
-            <input
-              type="text"
-              name="LNAME"
-              id="mce-LNAME"
-              placeholder="Nom de famille"
-              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-            />
-            
             {/* Prénom (Mailchimp: FNAME) */}
             <input
               type="text"
@@ -309,7 +300,7 @@ const Waitlists = () => {
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
 
-            {/* Email (obligatoire) (Mailchimp: EMAIL) */}
+            {/* Email (obligatoire) */}
             <input
               type="email"
               name="EMAIL"
@@ -317,7 +308,16 @@ const Waitlists = () => {
               required
               placeholder="Email"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-             />
+            />
+
+            {/* Nom de famille (optionnel) */}
+            <input
+              type="text"
+              name="LNAME"
+              id="mce-LNAME"
+              placeholder="Nom de famille (optionnel)"
+              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
 
             {/* Honeypot anti-bots — ne pas retirer */}
             <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
@@ -329,7 +329,6 @@ const Waitlists = () => {
               />
             </div>
 
-            {/* Bouton submit */}
             <button
               type="submit"
               name="subscribe"
@@ -341,50 +340,79 @@ const Waitlists = () => {
           </form>
         </div>
 
-        {/* --- FORMULAIRE PARTENAIRES (FORMSPREE) --- */}
+        {/* --- FORMULAIRE PARTENAIRES (MAILCHIMP) --- */}
         <div id="waitlist-partners" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Proposer une expérience (Partenaires)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
             Club, studio, bar, atelier, artisan : propose un créneau Explore pour attirer une nouvelle clientèle locale.
           </p>
 
-          <form action="https://formspree.io/f/mpwjdwjd" method="POST" className="mt-6 grid gap-3 sm:grid-cols-2">
+          <form
+            action="https://gmail.us5.list-manage.com/subscribe/post?u=d419766ed8ae8c96904fac1a0&id=ebe8553656&f_id=0062a5e0f0"
+            method="POST"
+            className="mt-6 grid gap-3 sm:grid-cols-2"
+            target="_blank"
+            noValidate
+          >
+            {/* Nom de l'entreprise */}
             <input
-              required
-              name="business"
               type="text"
-              placeholder="Nom de l'établissement"
+              name="COMPANY"
+              id="mce-COMPANY"
+              placeholder="Nom de l'entreprise"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+              required
+            />
+
+            {/* Email (obligatoire) */}
+            <input
+              type="email"
+              name="EMAIL"
+              id="mce-EMAIL"
+              placeholder="Adresse e-mail"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+              required
+            />
+
+            {/* Téléphone (optionnel) */}
+            <input
+              type="text"
+              name="PHONE"
+              id="mce-PHONE"
+              placeholder="Numéro de téléphone (optionnel)"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
+
+            {/* Ville */}
             <input
-              required
-              name="city"
               type="text"
+              name="VILLE"
+              id="mce-VILLE"
               placeholder="Ville"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-            />
-            <input
               required
-              name="email"
-              type="email"
-              placeholder="Email"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
+
+            {/* Type d'expérience */}
             <input
-              name="phone"
-              type="tel"
-              placeholder="Téléphone (optionnel)"
-              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
-            />
-            <input
-              required
-              name="experience"
               type="text"
-              placeholder="Type d'expérience (ex: yoga, dégustation)"
+              name="EXPERIENCE"
+              id="mce-EXPERIENCE"
+              placeholder="Type d'expérience (ex : yoga, dégustation, …)"
               className="sm:col-span-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+              required
             />
-            {/* Anti-spam honeypot (optionnel) */}
-            <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
+
+            {/* Honeypot anti-bots — ne pas retirer */}
+            <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
+              <input
+                type="text"
+                name="b_d419766ed8ae8c96904fac1a0_ebe8553656"
+                tabIndex="-1"
+                defaultValue=""
+              />
+            </div>
+
             <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
               Devenir partenaire <ArrowRight size={16} />
             </button>
