@@ -294,7 +294,7 @@ const Waitlists = () => {
             {/* Champ caché pour segmenter */}
             <input type="hidden" name="TYPE" value="Client" />
 
-             {/* Nom (optionnel) */}
+             {/* Nom */}
             <input
               type="text"
               name="LNAME"
@@ -385,7 +385,7 @@ const Waitlists = () => {
               type="text"
               name="PHONE"
               id="mce-PHONE"
-              placeholder="Numéro de téléphone (optionnel)"
+              placeholder="Numéro de téléphone"
               className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
 
