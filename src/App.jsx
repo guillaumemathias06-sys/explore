@@ -277,45 +277,77 @@ const Waitlists = () => {
     <Section id="waitlist" className="py-16 sm:py-24">
       <div className="grid gap-8 md:grid-cols-2">
 
-        {/* --- FORMULAIRE USERS --- */}
+        {/* --- FORMULAIRE USERS (MAILCHIMP) --- */}
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
             Sois parmi les premiers à tester Explore à tarif réduit. On t'enverra les invitations dès l'ouverture.
           </p>
 
-          {/* Formulaire Users */}
-          <form action="https://formspree.io/f/xovndvnj" method="POST" className="mt-6 grid gap-3 sm:grid-cols-3">
+          <form
+            action="https://gmail.us5.list-manage.com/subscribe/post?u=d419766ed8ae8c96904fac1a0&id=ebe8553656&f_id=0063a5e0f0"
+            method="POST"
+            className="mt-6 grid gap-3 sm:grid-cols-3"
+            target="_blank"
+            noValidate
+          >
+            {/* Prénom (Mailchimp: FNAME) */}
             <input
-              required
-              name="first_name"
               type="text"
+              name="FNAME"
+              id="mce-FNAME"
               placeholder="Prénom"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
+
+            {/* Email (obligatoire) (Mailchimp: EMAIL) */}
             <input
-              required
-              name="email"
               type="email"
+              name="EMAIL"
+              id="mce-EMAIL"
+              required
               placeholder="Email"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
-            {/* Anti-spam honeypot (optionnel) */}
-            <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
-            <button className="sm:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
+
+            {/* Nom de famille (optionnel) (Mailchimp: LNAME) */}
+            <input
+              type="text"
+              name="LNAME"
+              id="mce-LNAME"
+              placeholder="Nom de famille (optionnel)"
+              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+
+            {/* Honeypot anti-bots — ne pas retirer */}
+            <div aria-hidden="true" style={{ position: "absolute", left: "-5000px" }}>
+              <input
+                type="text"
+                name="b_d419766ed8ae8c96904fac1a0_ebe8553656"
+                tabIndex="-1"
+                defaultValue=""
+              />
+            </div>
+
+            {/* Bouton submit */}
+            <button
+              type="submit"
+              name="subscribe"
+              id="mc-embedded-subscribe"
+              className="sm:col-span-3 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+            >
               Je veux tester <Sparkles size={16} />
             </button>
           </form>
         </div>
 
-        {/* --- FORMULAIRE PARTENAIRES --- */}
+        {/* --- FORMULAIRE PARTENAIRES (FORMSPREE) --- */}
         <div id="waitlist-partners" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Proposer une expérience (Partenaires)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
             Club, studio, bar, atelier, artisan : propose un créneau Explore pour attirer une nouvelle clientèle locale.
           </p>
 
-          {/* Formulaire Partenaires */}
           <form action="https://formspree.io/f/mpwjdwjd" method="POST" className="mt-6 grid gap-3 sm:grid-cols-2">
             <input
               required
@@ -363,6 +395,7 @@ const Waitlists = () => {
     </Section>
   );
 };
+
 
 
 
