@@ -273,7 +273,6 @@ const PartnersCTA = () => (
 );
 
 const Waitlists = () => {
-  const [sentUser, setSentUser] = useState(false);
   const [sentPartner, setSentPartner] = useState(false);
 
   return (
@@ -286,28 +285,7 @@ const Waitlists = () => {
             Sois parmi les premiers à tester Explore à tarif réduit. On t'enverra les invitations dès l'ouverture.
           </p>
 
-          <form
-            className="mt-6 grid gap-3 sm:grid-cols-3"
-            onSubmit={async (e) => {
-              e.preventDefault();
-              const form = e.currentTarget;
-              try {
-                const res = await fetch("https://formspree.io/f/xovndvnj", {
-                  method: "POST",
-                  headers: { Accept: "application/json" },
-                  body: new FormData(form),
-                });
-                if (res.ok) {
-                  form.reset();
-                  setSentUser(true);
-                } else {
-                  alert("Oups, envoi impossible. Réessaie dans un instant.");
-                }
-              } catch {
-                alert("Problème réseau. Réessaie.");
-              }
-            }}
-          >
+          <form action="https://formspree.io/f/xovndvnj" method="POST" className="mt-6 grid gap-3 sm:grid-cols-3">
             <input
               required
               name="first_name"
@@ -322,7 +300,6 @@ const Waitlists = () => {
               placeholder="Email"
               className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
             />
-
             {/* Anti-spam honeypot (optionnel) */}
             <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
 
@@ -330,12 +307,6 @@ const Waitlists = () => {
               Je veux tester <Sparkles size={16} />
             </button>
           </form>
-
-          {sentUser && (
-            <p className="mt-3 text-sm text-emerald-700">
-              Merci ! Tu es bien inscrit·e. On te préviendra pour le lancement 🎉
-            </p>
-          )}
         </div>
 
         {/* --- FORMULAIRE PARTENAIRES --- */}
@@ -396,6 +367,7 @@ const Waitlists = () => {
     </Section>
   );
 };
+
 
 
 
