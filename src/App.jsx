@@ -279,48 +279,145 @@ const Waitlists = () => {
   return (
     <Section id="waitlist" className="py-16 sm:py-24">
       <div className="grid gap-8 md:grid-cols-2">
+        {/* ==== USERS ==== */}
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
-          <p className="mt-2 max-w-lg text-slate-600">Sois parmi les premiers à tester Explore à tarif réduit. On t'enverra les invitations dès l'ouverture.</p>
+          <p className="mt-2 max-w-lg text-slate-600">
+            Sois parmi les premiers à tester Explore à tarif réduit. On t&apos;enverra les invitations dès l&apos;ouverture.
+          </p>
           <form
             className="mt-6 grid gap-3 sm:grid-cols-3"
-            onSubmit={(e)=>{e.preventDefault(); setSentUser(true);}}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              try {
+                const res = await fetch("https://formspree.io/f/xovndvnj", {
+                  method: "POST",
+                  headers: { Accept: "application/json" },
+                  body: new FormData(form),
+                });
+                if (res.ok) {
+                  form.reset();
+                  setSentUser(true);
+                } else {
+                  alert("Oups, envoi impossible. Réessaie dans un instant.");
+                }
+              } catch {
+                alert("Problème réseau. Réessaie.");
+              }
+            }}
           >
-            <input required type="text" placeholder="Prénom" className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
-            <input required type="email" placeholder="Email" className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
+            <input
+              required
+              name="first_name"
+              type="text"
+              placeholder="Prénom"
+              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            <input
+              required
+              name="email"
+              type="email"
+              placeholder="Email"
+              className="sm:col-span-1 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            {/* Anti-spam honeypot */}
+            <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
             <button className="sm:col-span-1 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
-              Je veux tester <Sparkles size={16}/>
+              Je veux tester <Sparkles size={16} />
             </button>
           </form>
           {sentUser && (
-            <p className="mt-3 text-sm text-emerald-700">Merci ! Tu es bien inscrit·e. On te préviendra pour le lancement 🎉</p>
+            <p className="mt-3 text-sm text-emerald-700">
+              Merci ! Tu es bien inscrit·e. On te préviendra pour le lancement 🎉
+            </p>
           )}
         </div>
 
-        <div id="waitlist-partners" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
-          <h3 className="text-2xl font-bold text-slate-900">Proposer une expérience (Partenaires)</h3>
-          <p className="mt-2 max-w-lg text-slate-600">Club, studio, bar, atelier, artisan : propose un créneau Explore pour attirer une nouvelle clientèle locale.</p>
+        {/* ==== PARTENAIRES ==== */}
+        <div
+          id="waitlist-partners"
+          className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm"
+        >
+          <h3 className="text-2xl font-bold text-slate-900">
+            Proposer une expérience (Partenaires)
+          </h3>
+          <p className="mt-2 max-w-lg text-slate-600">
+            Club, studio, bar, atelier, artisan : propose un créneau Explore pour attirer une nouvelle clientèle locale.
+          </p>
           <form
             className="mt-6 grid gap-3 sm:grid-cols-2"
-            onSubmit={(e)=>{e.preventDefault(); setSentPartner(true);}}
+            onSubmit={async (e) => {
+              e.preventDefault();
+              const form = e.currentTarget;
+              try {
+                const res = await fetch("TON_ENDPOINT_PARTENAIRES", {
+                  method: "POST",
+                  headers: { Accept: "application/json" },
+                  body: new FormData(form),
+                });
+                if (res.ok) {
+                  form.reset();
+                  setSentPartner(true);
+                } else {
+                  alert("Oups, envoi impossible. Réessaie dans un instant.");
+                }
+              } catch {
+                alert("Problème réseau. Réessaie.");
+              }
+            }}
           >
-            <input required type="text" placeholder="Nom de l'établissement" className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
-            <input required type="text" placeholder="Ville" className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
-            <input required type="email" placeholder="Email" className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
-            <input type="tel" placeholder="Téléphone (optionnel)" className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
-            <input required type="text" placeholder="Type d'expérience (ex: yoga, dégustation)" className="sm:col-span-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"/>
+            <input
+              required
+              name="business"
+              type="text"
+              placeholder="Nom de l'établissement"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            <input
+              required
+              name="city"
+              type="text"
+              placeholder="Ville"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            <input
+              required
+              name="email"
+              type="email"
+              placeholder="Email"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            <input
+              name="phone"
+              type="tel"
+              placeholder="Téléphone (optionnel)"
+              className="rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            <input
+              required
+              name="experience"
+              type="text"
+              placeholder="Type d'expérience (ex: yoga, dégustation)"
+              className="sm:col-span-2 rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm outline-none focus:border-slate-900"
+            />
+            {/* Anti-spam honeypot */}
+            <input type="text" name="_gotcha" tabIndex="-1" autoComplete="off" className="hidden" />
             <button className="sm:col-span-2 inline-flex items-center justify-center gap-2 rounded-xl bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">
-              Devenir partenaire <ArrowRight size={16}/>
+              Devenir partenaire <ArrowRight size={16} />
             </button>
           </form>
           {sentPartner && (
-            <p className="mt-3 text-sm text-emerald-700">Merci ! On te contacte rapidement pour valider un premier créneau.</p>
+            <p className="mt-3 text-sm text-emerald-700">
+              Merci ! On te contacte rapidement pour valider un premier créneau.
+            </p>
           )}
         </div>
       </div>
     </Section>
   );
 };
+
 
 const FAQ = () => (
   <Section id="faq" className="py-16 sm:py-24">
