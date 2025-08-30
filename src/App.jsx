@@ -364,7 +364,7 @@ const Waitlists = () => {
               required
             />
 
-            {/* Email (obligatoire) */}
+            {/* Email */}
             <input
               type="email"
               name="EMAIL"
@@ -374,7 +374,7 @@ const Waitlists = () => {
               required
             />
 
-            {/* Téléphone (optionnel) */}
+            {/* Téléphone */}
             <input
               type="text"
               name="PHONE"
