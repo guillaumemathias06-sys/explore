@@ -2,16 +2,23 @@ import React, { useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, MapPin, Gift, CreditCard, QrCode, Shield, Phone, CalendarRange, Users2, CheckCircle2 } from "lucide-react";
 
-// Brand colors
+// Brand colors (tu peux ajuster si besoin)
 const COLORS = {
   primary: "#0077B6", // Bleu azur Nice
   accent: "#FF7B54", // Orange énergique
-  ink: "#0F172A", // Slate-900
+  ink: "#0F172A",    // Slate-900
+};
+
+// Renseigne ici tes liens Stripe Checkout (mode test puis live)
+const STRIPE_LINKS = {
+  Essential: "https://checkout.stripe.com/c/pay/cs_test_ESSENTIAL", // TODO: remplace
+  Plus:      "https://checkout.stripe.com/c/pay/cs_test_PLUS",      // TODO: remplace
+  Unlimited: "https://checkout.stripe.com/c/pay/cs_test_UNLIMITED", // TODO: remplace
 };
 
 // Inline SVG Logo (minimaliste + universel)
-const ExploreLogo = ({ className = "w-8 h-8" }) => (
-  <svg viewBox="0 0 64 64" className={className} aria-label="Logo Explore" role="img">
+const FeetzyLogo = ({ className = "w-8 h-8" }) => (
+  <svg viewBox="0 0 64 64" className={className} aria-label="Logo Feetzy" role="img">
     <defs>
       <marker id="arrow" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
         <path d="M0,0 L6,3 L0,6 Z" fill={COLORS.primary} />
@@ -44,8 +51,8 @@ const Nav = () => {
     <header className="sticky top-0 z-40 w-full border-b border-slate-200/50 bg-white/80 backdrop-blur">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         <a href="#" className="flex items-center gap-2">
-          <ExploreLogo />
-          <span className="text-xl font-extrabold tracking-tight" style={{ color: COLORS.primary }}>EXPLORE</span>
+          <FeetzyLogo />
+          <span className="text-xl font-extrabold tracking-tight" style={{ color: COLORS.primary }}>FEETZY</span>
         </a>
         <nav className="hidden items-center gap-6 md:flex">
           <a href="#concept" className="text-sm text-slate-700 hover:text-slate-900">Concept</a>
@@ -83,7 +90,7 @@ const Hero = () => {
               Chaque semaine, une <span style={{ color: COLORS.primary }}>nouvelle expérience</span>
             </h1>
             <p className="mt-5 max-w-xl text-lg text-slate-600">
-              Explore est l'abonnement mensuel pour vivre des micro‑aventures locales (sport, bien‑être, food, culture) à prix doux. Réservez, scannez, profitez.
+              <b>Feetzy</b> est l'abonnement mensuel pour vivre des micro-aventures locales (sport, bien-être, food, culture) à prix doux. Réserve, scanne, profite.
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <a href="#waitlist" className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow hover:bg-slate-800">
@@ -104,10 +111,10 @@ const Hero = () => {
             {/* Pass dynamique de démonstration */}
             <div className="mx-auto w-full max-w-md rounded-3xl border border-slate-200 bg-white p-6 shadow-xl">
               <div className="mb-4 flex items-center gap-3">
-                <ExploreLogo className="h-10 w-10" />
+                <FeetzyLogo className="h-10 w-10" />
                 <div>
                   <div className="text-xs uppercase tracking-widest text-slate-500">Pass hebdo</div>
-                  <div className="text-lg font-bold" style={{ color: COLORS.primary }}>EXPLORE</div>
+                  <div className="text-lg font-bold" style={{ color: COLORS.primary }}>FEETZY</div>
                 </div>
               </div>
               <div className="rounded-2xl bg-gradient-to-br from-orange-50 to-blue-50 p-4">
@@ -150,17 +157,17 @@ const Concept = () => (
     <div className="grid gap-10 md:grid-cols-2">
       <div>
         <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Comment ça marche ?</h2>
-        <p className="mt-4 max-w-xl text-lg text-slate-600">Abonne‑toi, reçois une expérience surprise chaque semaine (ou choisis parmi une sélection), scanne ton pass et profite. Les partenaires remplissent leurs créneaux vides, tout le monde gagne.</p>
+        <p className="mt-4 max-w-xl text-lg text-slate-600">Abonne-toi, reçois une expérience surprise chaque semaine (ou choisis parmi une sélection), scanne ton pass et profite. Les partenaires remplissent leurs créneaux vides, tout le monde gagne.</p>
         <div className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-3">
           <FeatureCard icon={CreditCard} title="Je m'abonne">29,90€ / mois. Sans engagement. Annulable à tout moment.</FeatureCard>
-          <FeatureCard icon={Gift} title="Je découvre">Une micro‑aventure locale par semaine : sport, bien‑être, food, culture.</FeatureCard>
+          <FeatureCard icon={Gift} title="Je découvre">Une micro-aventure locale par semaine : sport, bien-être, food, culture.</FeatureCard>
           <FeatureCard icon={QrCode} title="Je scanne">Pass QR valide 7 jours. Invitez un ami en option.</FeatureCard>
         </div>
       </div>
       <div className="rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8">
         <h3 className="text-xl font-semibold text-slate-900">Catégories d'expériences</h3>
         <div className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-3">
-          {["Sport & Outdoor","Bien‑être","Gastronomie","Culture & Art","Aventure","Nuit & Rooftops"].map((c,i)=> (
+          {["Sport & Outdoor","Bien-être","Gastronomie","Culture & Art","Aventure","Nuit & Rooftops"].map((c,i)=> (
             <div key={i} className="rounded-xl border border-slate-200 bg-white p-4 text-sm font-medium text-slate-700 shadow-sm">{c}</div>
           ))}
         </div>
@@ -200,7 +207,7 @@ const Pricing = () => {
             {p.highlight && (
               <span className="absolute -top-3 left-6 rounded-full bg-slate-900 px-3 py-1 text-xs font-semibold text-white">Populaire</span>
             )}
-            <h3 className="text-xl font-semibold">{p.name}</h3>
+            <h3 className="text-xl font-semibold">Feetzy {p.name}</h3>
             <p className="mt-1 text-sm text-slate-600">{p.desc}</p>
             <div className="mt-6 flex items-end gap-1">
               <span className="text-4xl font-extrabold">{p.price.toLocaleString("fr-FR", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}€</span>
@@ -212,7 +219,16 @@ const Pricing = () => {
                 <li key={idx} className="flex items-center gap-2"><CheckCircle2 className="text-emerald-600" size={16}/>{perk}</li>
               ))}
             </ul>
-            <a href="#waitlist" className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800">Choisir {p.name}</a>
+
+            {/* Bouton Stripe Checkout */}
+            <a
+              href={STRIPE_LINKS[p.name] || "#waitlist"}
+              target="_blank"
+              rel="noreferrer"
+              className="mt-6 inline-flex w-full items-center justify-center rounded-full bg-slate-900 px-4 py-3 text-sm font-semibold text-white hover:bg-slate-800"
+            >
+              Choisir {p.name}
+            </a>
           </div>
         ))}
       </div>
@@ -228,7 +244,7 @@ const Experiences = () => (
     </div>
     <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
       {[
-        {title:"Yoga sunrise plage", tag:"Bien‑être"},
+        {title:"Yoga sunrise plage", tag:"Bien-être"},
         {title:"Atelier cocktails signature", tag:"Gastronomie"},
         {title:"Escalade indoor boulder", tag:"Sport"},
         {title:"Dégustation vins bio", tag:"Food & Wine"},
@@ -252,7 +268,7 @@ const PartnersCTA = () => (
   <Section id="partenaires" className="py-16 sm:py-24">
     <div className="grid items-center gap-10 rounded-3xl border border-slate-200 bg-white p-8 shadow-sm md:grid-cols-2">
       <div>
-        <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Devenez un lieu <span style={{ color: COLORS.primary }}>Explore</span></h2>
+        <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">Devenez un lieu <span style={{ color: COLORS.primary }}>Feetzy</span></h2>
         <p className="mt-3 max-w-xl text-slate-600">Remplissez vos créneaux vides, faites découvrir votre lieu à de nouveaux clients et rejoignez un réseau d'expériences locales de qualité.</p>
         <ul className="mt-5 space-y-2 text-sm text-slate-700">
           <li className="flex items-center gap-2"><CheckCircle2 className="text-emerald-600" size={16}/> Sans frais d'entrée</li>
@@ -264,7 +280,7 @@ const PartnersCTA = () => (
       <div className="rounded-2xl bg-gradient-to-br from-blue-50 to-orange-50 p-6">
         <div className="rounded-xl border border-slate-200 bg-white p-4 text-sm text-slate-700 shadow-sm">
           <p className="font-semibold">Exemple partenaire</p>
-          <p className="mt-1">« Grâce à Explore, on remplit nos créneaux du mardi soir et on a converti 27% des explorateurs en clients réguliers. »</p>
+          <p className="mt-1">« Grâce à Feetzy, on remplit nos créneaux du mardi soir et on a converti 27% des membres en clients réguliers. »</p>
           <p className="mt-2 text-slate-500">— Club local, Nice</p>
         </div>
       </div>
@@ -281,7 +297,7 @@ const Waitlists = () => {
         <div className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Rejoindre la bêta (Nice)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
-            Sois parmi les premiers à tester Explore à tarif réduit. On t'enverra les invitations dès l'ouverture.
+            Sois parmi les premiers à tester <b>Feetzy</b> à tarif réduit. On t'enverra les invitations dès l'ouverture.
           </p>
 
           <form
@@ -347,7 +363,7 @@ const Waitlists = () => {
         <div id="waitlist-partners" className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
           <h3 className="text-2xl font-bold text-slate-900">Proposer une expérience (Partenaires)</h3>
           <p className="mt-2 max-w-lg text-slate-600">
-            Club, studio, bar, atelier, artisan : propose un créneau Explore pour attirer une nouvelle clientèle locale.
+            Club, studio, bar, atelier, artisan : propose un créneau <b>Feetzy</b> pour attirer une nouvelle clientèle locale.
           </p>
 
           <form
@@ -430,14 +446,6 @@ const Waitlists = () => {
   );
 };
 
-
-
-
-
-
-
-
-
 const FAQ = () => (
   <Section id="faq" className="py-16 sm:py-24">
     <div className="mx-auto max-w-3xl">
@@ -445,8 +453,8 @@ const FAQ = () => (
       <div className="mt-8 divide-y divide-slate-200 rounded-2xl border border-slate-200 bg-white">
         {[
           {q:"Que contient l'abonnement ?", a:"Au moins 1 expérience locale par semaine, à choisir parmi une sélection dans Nice et alentours. Certaines expériences premium peuvent demander un léger supplément annoncé à l'avance."},
-          {q:"Puis‑je annuler quand je veux ?", a:"Oui. C'est sans engagement. Tu peux annuler à tout moment depuis ton espace compte. Ton accès reste actif jusqu'à la fin de la période en cours."},
-          {q:"Comment fonctionne le pass ?", a:"Après réservation, tu reçois un QR code valable 7 jours. Présente‑le sur place pour valider."},
+          {q:"Puis-je annuler quand je veux ?", a:"Oui. C'est sans engagement. Tu peux annuler à tout moment depuis ton espace compte. Ton accès reste actif jusqu'à la fin de la période en cours."},
+          {q:"Comment fonctionne le pass ?", a:"Après réservation, tu reçois un QR code valable 7 jours. Présente-le sur place pour valider."},
           {q:"Et pour les partenaires ?", a:"Nous rémunérons chaque place remplie et vous bénéficiez d'une exposition auprès d'une communauté locale curieuse et active."},
         ].map((item, i)=> (
           <details key={i} className="group p-6 open:pb-6">
@@ -468,8 +476,8 @@ const Footer = () => (
       <div className="grid gap-8 sm:grid-cols-2 md:grid-cols-4">
         <div>
           <div className="flex items-center gap-2">
-            <ExploreLogo />
-            <span className="text-lg font-extrabold tracking-tight" style={{ color: COLORS.primary }}>EXPLORE</span>
+            <FeetzyLogo />
+            <span className="text-lg font-extrabold tracking-tight" style={{ color: COLORS.primary }}>FEETZY</span>
           </div>
           <p className="mt-3 text-sm text-slate-600">L'abonnement pour vivre plus, localement. Nice comme ville pilote.</p>
         </div>
@@ -498,7 +506,7 @@ const Footer = () => (
         </div>
       </div>
       <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-slate-200 pt-6 text-sm text-slate-500 sm:flex-row">
-        <p>© {new Date().getFullYear()} Explore — Tous droits réservés.</p>
+        <p>© {new Date().getFullYear()} Feetzy — Tous droits réservés.</p>
         <div className="flex items-center gap-4">
           <a href="#" aria-label="Instagram" className="hover:text-slate-900">Instagram</a>
           <a href="#" aria-label="TikTok" className="hover:text-slate-900">TikTok</a>
@@ -509,7 +517,7 @@ const Footer = () => (
   </footer>
 );
 
-export default function ExploreLanding() {
+export default function FeetzyLanding() {
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <Nav />
